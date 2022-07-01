@@ -4,7 +4,42 @@ import (
 	"fmt"
 )
 
+var name, surname string
+
+func init() {
+	name = "John"
+}
+func init() {
+	if surname == "" {
+		surname = "Doe"
+	}
+}
+
 var isGlobalVar string = "Hello, Max!"
+
+func myFunctionOne(x, y int, z string) (result1, result2 int, result3 string) {
+	//func body
+	var returnAsResult1 int
+	returnAsResult1 = x + y
+
+	var returnAsResult2 = x - y
+
+	returnAsResult3 := z + "_"
+
+	if x > 5 {
+		result2 = x - y
+	} else if y > 5 {
+		result2 = y - x
+	} else {
+		result2 = x + 10
+	}
+
+	return returnAsResult1, returnAsResult2, returnAsResult3
+}
+
+func myFunctionSideEffectsNoReturn(str1, str2 string) {
+	fmt.Println("string 1: ", str1, " String 2: ", str2)
+}
 
 func main() {
 	fmt.Println("Hello, world!")
@@ -136,4 +171,17 @@ func main() {
 	for k, v := range myMap11 {
 		fmt.Printf("Ключ %v, имеет значение %v \n", k, v)
 	}
+
+	f1, f2, _ := myFunctionOne(1, 2, "fuck")
+	fmt.Println(f1, f2)
+	_, _, f3 := myFunctionOne(6, 0, "fuck")
+	fmt.Println(f1, f2, f3)
+	f1, f2, f3 = myFunctionOne(1, 1, "fuck")
+	fmt.Println(f1, f2, f3)
+
+	myFunctionSideEffectsNoReturn("Hello", "Max")
+
+	//undeclared and unnamed function = literal form = anonymous function
+	lambdaFunc := func(s string) string { return s }
+	myFunctionSideEffectsNoReturn("Hello", lambdaFunc("Masha"))
 }
