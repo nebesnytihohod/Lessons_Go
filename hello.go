@@ -101,4 +101,39 @@ func main() {
 	type DUL int64
 	pointerDUL := new(DUL)
 	println("pointer to address of my type: ", pointerDUL)
+
+	var myMap1 = make(map[string]string)
+	myMap1["a"] = "A"
+	var myMap10 map[string]string
+	myMap10 = make(map[string]string)
+	var myMap11 = map[int]string{11: "one", 12: "two"}
+	myMap2 := make(map[int]string)
+	myMap2[2] = "AA"
+	myMap21 := map[int]string{21: "one", 22: "two", 33: ""}
+
+	type MyMap map[string]int64
+	var map3 MyMap
+	map3 = make(MyMap, 7)
+
+	var m1 = myMap1["a"]
+	m2 := myMap2[2]
+	m11, isFilledMyMap11 := myMap11[11]
+	m21, isFilledMyMap21 := myMap21[22]
+	m211, isFilledMyMap211 := myMap21[33]
+	m2111, isFilledMyMap2111 := myMap21[44]
+
+	fmt.Println(myMap1, myMap2, map3)
+	fmt.Println(myMap11, myMap21)
+	fmt.Println(myMap1["a"], m1, m2, m11, isFilledMyMap11, m21, isFilledMyMap21, m211, isFilledMyMap211, m2111, isFilledMyMap2111)
+
+	if myMap10 == nil {
+		println("Map is not initialized!")
+	} else {
+		m10, isFilledMyMap10 := myMap10[""]
+		println("myMap10: ", myMap10, " ", "m10: ", m10, " ", "Filled?: ", isFilledMyMap10)
+	}
+
+	for k, v := range myMap11 {
+		fmt.Printf("Ключ %v, имеет значение %v \n", k, v)
+	}
 }
