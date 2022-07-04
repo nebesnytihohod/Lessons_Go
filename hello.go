@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 var name, surname string
@@ -39,6 +40,21 @@ func myFunctionOne(x, y int, z string) (result1, result2 int, result3 string) {
 
 func myFunctionSideEffectsNoReturn(str1, str2 string) {
 	fmt.Println("string 1: ", str1, " String 2: ", str2)
+}
+
+func myFunctionTwo(str1, str2 string) string {
+	startTime := time.Now()
+	defer func(st time.Time) { println("Время выполнения функции: ", time.Now().Sub(st)) }(startTime)
+	println("--------start func--------------------------")
+	defer println("defered output 1")
+	for i := 1; i <= 3; i++ {
+		defer println("defered output 2: i = ", i)
+	}
+	println(str1)
+	println(str2)
+	println("--------end func--------------------------")
+
+	return str1 + " " + str2
 }
 
 func main() {
@@ -184,4 +200,7 @@ func main() {
 	//undeclared and unnamed function = literal form = anonymous function
 	lambdaFunc := func(s string) string { return s }
 	myFunctionSideEffectsNoReturn("Hello", lambdaFunc("Masha"))
+
+	fullName := myFunctionTwo(name, surname)
+	fmt.Println("Fullname: ", fullName)
 }
